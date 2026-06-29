@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const analyticsController_1 = require("../controllers/analyticsController");
+const auth_1 = require("../middlewares/auth");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateJWT);
+router.get('/dashboard', analyticsController_1.analyticsController.getDashboardKPIs);
+router.get('/funnel', analyticsController_1.analyticsController.getFunnel);
+router.get('/responsetime', analyticsController_1.analyticsController.getResponseTime);
+router.get('/agents', (0, auth_1.requireRoles)(['ADMIN', 'SALES_MANAGER']), analyticsController_1.analyticsController.getAgentLeaderboard);
+router.get('/export', (0, auth_1.requireRoles)(['ADMIN', 'SALES_MANAGER']), analyticsController_1.analyticsController.exportReport);
+exports.default = router;

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const followupController_1 = require("../controllers/followupController");
+const auth_1 = require("../middlewares/auth");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateJWT);
+router.get('/', followupController_1.followupController.getFollowUps);
+router.post('/', followupController_1.followupController.createFollowUp);
+router.post('/:id/complete', followupController_1.followupController.completeFollowUp);
+router.post('/:id/snooze', followupController_1.followupController.snoozeFollowUp);
+router.post('/:id/reschedule', followupController_1.followupController.rescheduleFollowUp);
+exports.default = router;

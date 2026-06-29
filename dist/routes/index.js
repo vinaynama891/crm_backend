@@ -1,0 +1,28 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const authRoutes_1 = __importDefault(require("./authRoutes"));
+const leadRoutes_1 = __importDefault(require("./leadRoutes"));
+const propertyRoutes_1 = __importDefault(require("./propertyRoutes"));
+const followupRoutes_1 = __importDefault(require("./followupRoutes"));
+const siteVisitRoutes_1 = __importDefault(require("./siteVisitRoutes"));
+const analyticsRoutes_1 = __importDefault(require("./analyticsRoutes"));
+const settingsRoutes_1 = __importDefault(require("./settingsRoutes"));
+const twimlRoutes_1 = __importDefault(require("./twimlRoutes"));
+const webhookRoutes_1 = __importDefault(require("./webhookRoutes"));
+const notificationRoutes_1 = __importDefault(require("./notificationRoutes"));
+const router = (0, express_1.Router)();
+router.use('/auth', authRoutes_1.default);
+router.use('/leads', leadRoutes_1.default);
+router.use('/properties', propertyRoutes_1.default);
+router.use('/followups', followupRoutes_1.default);
+router.use('/sitevisits', siteVisitRoutes_1.default);
+router.use('/analytics', analyticsRoutes_1.default);
+router.use('/settings', settingsRoutes_1.default);
+router.use('/twiml', twimlRoutes_1.default);
+router.use('/webhooks', webhookRoutes_1.default);
+router.use('/notifications', notificationRoutes_1.default);
+exports.default = router;

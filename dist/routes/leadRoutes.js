@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const leadController_1 = require("../controllers/leadController");
+const auth_1 = require("../middlewares/auth");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateJWT);
+router.get('/', leadController_1.leadController.getLeads);
+router.post('/', leadController_1.leadController.createLead);
+router.get('/:id', leadController_1.leadController.getLeadById);
+router.put('/:id', leadController_1.leadController.updateLead);
+router.post('/:id/call', leadController_1.leadController.callLead);
+router.post('/:id/share', leadController_1.leadController.shareProperty);
+router.post('/:id/notes', leadController_1.leadController.addNote);
+router.post('/:id/whatsapp', leadController_1.leadController.sendWhatsApp);
+router.post('/:id/assign', (0, auth_1.requireRoles)(['ADMIN', 'SALES_MANAGER']), leadController_1.leadController.assignAgent);
+exports.default = router;
